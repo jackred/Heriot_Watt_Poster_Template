@@ -3,6 +3,10 @@
 %% turn off comment in the lower right corner
 \tikzposterlatexaffectionproofoff
 
+%% bibliography config
+%% https://tex.stackexchange.com/a/6977
+\addbibresource{Bibliography.bib}
+
 %% palette
 \definecolorpalette{HWPalette}{%% constant 
 \definecolor{titleFGAll}{named}{black}
@@ -85,5 +89,24 @@
     \tikz[remember picture,overlay]\node[anchor=south east,xshift=0.46\linewidth,yshift=0,inner sep=0pt] {%
        \@titlegraphic
     };
+}
+\makeatother
+
+%% table
+%5 https://tex.stackexchange.com/a/337954/191321
+\makeatletter
+\newcounter{tablecounter}
+\newenvironment{tikztable}[1][]{
+  \def \rememberparameter{#1}
+  \vspace{10pt}
+  \refstepcounter{tablecounter}
+  \begin{center}
+  }{
+    \ifx\rememberparameter\@empty
+    \else
+    \\[10pt]
+    {\small Tab.~\thetablecounter: \rememberparameter}
+    \fi
+  \end{center}
 }
 \makeatother
