@@ -1,0 +1,89 @@
+%% A0 paper is 2384 x 3370 for 72 PPI (standard)
+
+%% turn off comment in the lower right corner
+\tikzposterlatexaffectionproofoff
+
+%% palette
+\definecolorpalette{HWPalette}{%% constant 
+\definecolor{titleFGAll}{named}{black}
+\definecolor{fgAll}{named}{black}
+\definecolor{textBGAll}{named}{white}
+\definecolor{bkBG}{rgb}{0.081,0.328,0.861}
+%% background
+\definecolor{backgroundBG}{named}{textBGAll}
+\definecolor{frameBG}{named}{red}
+\definecolor{notesFrame}{named}{yellow}
+\colorlet{titleLine}{bkBG!40}
+}
+
+%% color style
+\definecolorstyle{sampleColorStyle}{}{
+% Background Colors
+\colorlet{backgroundcolor}{backgroundBG}
+\colorlet{framecolor}{frameBG}
+% Title Colors
+\colorlet{titlefgcolor}{titleFGAll}
+\colorlet{titlebgcolor}{textBGAll}
+% Block Colors
+\colorlet{blocktitlebgcolor}{bkBG!80}
+\colorlet{blocktitlefgcolor}{titleFGAll}
+\colorlet{blockbodybgcolor}{textBGAll}
+\colorlet{blockbodyfgcolor}{fgAll}
+% Innerblock Colors
+\colorlet{innerblocktitlebgcolor}{bkBG!50}
+\colorlet{innerblocktitlefgcolor}{titleFGAll}
+\colorlet{innerblockbodybgcolor}{textBGAll}
+\colorlet{innerblockbodyfgcolor}{fgAll}
+% Note colors
+\colorlet{notefgcolor}{fgAll}
+\colorlet{notebgcolor}{bkBG}
+\colorlet{noteframecolor}{notesFrame}
+}
+
+
+%% style
+%% title
+\definetitlestyle{HWTitleStyle}{
+    width=\textwidth, linewidth=15pt, titletotopverticalspace=40pt
+}{
+    \begin{scope}[line width=\titlelinewidth,]
+    \draw[color=titleLine,round cap-round cap]
+    (\titleposleft,\titleposbottom)--(\titleposright,\titleposbottom);
+    \end{scope}
+}
+
+%% theme and style
+%% background
+\definebackgroundstyle{mystyle}{
+    \draw[line width=0pt, bottom color=backgroundcolor, top
+     color=backgroundcolor!60!white] (bottomleft) rectangle (topright);
+    \draw[draw=none, line width=0pt, bottom color=titlebgcolor, top
+     color=framecolor] (bottomleft) rectangle ($(bottomleft)+(\textwidth,3)$);
+}
+
+
+\usebackgroundstyle{mystyle}
+\usecolorstyle[colorPalette=HWPalette]{sampleColorStyle}
+\usetitlestyle{HWTitleStyle}
+
+
+%% layout
+%% title
+\makeatletter
+\renewcommand\TP@maketitle{%
+   \centering
+   \begin{minipage}[b]{0.8\textwidth}
+        \centering
+        \color{titlefgcolor}
+        {\bfseries \Huge \sc \@title \par}
+        \vspace*{11pt}
+        {\huge \@author \par}
+        \vspace*{11pt}
+        {\LARGE \@institute}
+        \vspace*{13pt}
+    \end{minipage}%
+    \tikz[remember picture,overlay]\node[anchor=south east,xshift=0.46\linewidth,yshift=0,inner sep=0pt] {%
+       \@titlegraphic
+    };
+}
+\makeatother

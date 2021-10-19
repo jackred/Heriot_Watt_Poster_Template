@@ -1,0 +1,31 @@
+\documentclass[
+    22pt, 
+    a0paper, 
+    % portrait,
+    landscape,
+    margin=0mm, 
+    innermargin=30mm,
+    colspace=30mm,
+    subcolspace=30mm,
+    blockverticalspace=30mm
+]{tikzposter}
+%% A0 paper is 2384 x 3370 for 72 PPI (standard)
+
+\include{I-packages}
+\include{I-config}
+\include{I-info}
+
+\begin{document}
+\maketitle
+\centering
+
+\begin{columns}
+\column{0.27}
+\input{1-Column}
+\column{0.27}
+\input{2-Column}
+\column{0.46}
+\input{3-Column}
+\end{columns}
+
+\end{document}
