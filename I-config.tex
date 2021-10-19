@@ -8,16 +8,22 @@
 \addbibresource{Bibliography.bib}
 
 %% palette
-\definecolorpalette{HWPalette}{%% constant 
-\definecolor{titleFGAll}{named}{black}
-\definecolor{fgAll}{named}{black}
-\definecolor{textBGAll}{named}{white}
-\definecolor{bkBG}{rgb}{0.081,0.328,0.861}
+\definecolorpalette{HWPalette}{ 
+%% HW color
+\definecolor{colorOne}{cmyk}{0.45, 0.35, 0.16, 0.59}
+\definecolor{colorTwo}{cmyk}{0,0,0,0}
+\definecolor{colorThree}{cmyk}{0.85, 0.21, 0, 0}
+\definecolor{colorFour}{cmyk}{100, 0.52, 0.02, 0.15}
+\definecolor{colorFive}{cmyk}{0.21, 0.11, 0.09, 0.23}
+%% constant
+\definecolor{titlebkFG}{named}{colorTwo}
+\definecolor{fgAll}{named}{colorOne}
+\definecolor{textBGAll}{named}{colorTwo}
 %% background
-\definecolor{backgroundBG}{named}{textBGAll}
-\definecolor{frameBG}{named}{red}
-\definecolor{notesFrame}{named}{yellow}
-\colorlet{titleLine}{bkBG!40}
+\definecolor{backgroundBG}{named}{colorTwo}
+\definecolor{frameBG}{named}{colorFour}
+\definecolor{notesFrame}{named}{colorFive}
+\colorlet{titleLine}{colorFour}
 }
 
 %% color style
@@ -26,21 +32,21 @@
 \colorlet{backgroundcolor}{backgroundBG}
 \colorlet{framecolor}{frameBG}
 % Title Colors
-\colorlet{titlefgcolor}{titleFGAll}
+\colorlet{titlefgcolor}{colorOne}
 \colorlet{titlebgcolor}{textBGAll}
 % Block Colors
-\colorlet{blocktitlebgcolor}{bkBG!80}
-\colorlet{blocktitlefgcolor}{titleFGAll}
+\colorlet{blocktitlebgcolor}{colorFour}
+\colorlet{blocktitlefgcolor}{titlebkFG}
 \colorlet{blockbodybgcolor}{textBGAll}
 \colorlet{blockbodyfgcolor}{fgAll}
 % Innerblock Colors
-\colorlet{innerblocktitlebgcolor}{bkBG!50}
-\colorlet{innerblocktitlefgcolor}{titleFGAll}
+\colorlet{innerblocktitlebgcolor}{colorThree}
+\colorlet{innerblocktitlefgcolor}{titlebkFG}
 \colorlet{innerblockbodybgcolor}{textBGAll}
 \colorlet{innerblockbodyfgcolor}{fgAll}
 % Note colors
 \colorlet{notefgcolor}{fgAll}
-\colorlet{notebgcolor}{bkBG}
+\colorlet{notebgcolor}{colorFive}
 \colorlet{noteframecolor}{notesFrame}
 }
 
@@ -66,7 +72,7 @@
 }
 
 
-\usebackgroundstyle{mystyle}
+% \usebackgroundstyle{mystyle}
 \usecolorstyle[colorPalette=HWPalette]{sampleColorStyle}
 \usetitlestyle{HWTitleStyle}
 
