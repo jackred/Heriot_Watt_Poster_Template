@@ -27,7 +27,7 @@
 }
 
 %% color style
-\definecolorstyle{sampleColorStyle}{}{
+\definecolorstyle{HWColorStyle}{}{
 % Background Colors
 \colorlet{backgroundcolor}{backgroundBG}
 \colorlet{framecolor}{frameBG}
@@ -41,7 +41,7 @@
 \colorlet{blockbodyfgcolor}{fgAll}
 % Innerblock Colors
 \colorlet{innerblocktitlebgcolor}{colorThree}
-\colorlet{innerblocktitlefgcolor}{titlebkFG}
+\colorlet{innerblocktitlefgcolor}{colorOne}
 \colorlet{innerblockbodybgcolor}{textBGAll}
 \colorlet{innerblockbodyfgcolor}{fgAll}
 % Note colors
@@ -57,25 +57,61 @@
     width=\textwidth, linewidth=15pt, titletotopverticalspace=40pt
 }{
     \begin{scope}[line width=\titlelinewidth,]
-    \draw[color=titleLine,round cap-round cap]
+    \draw[color=titleLine,butt cap-butt cap]
     (\titleposleft,\titleposbottom)--(\titleposright,\titleposbottom);
     \end{scope}
 }
 
-%% theme and style
 %% background
-\definebackgroundstyle{mystyle}{
-    \draw[line width=0pt, bottom color=backgroundcolor, top
-     color=backgroundcolor!60!white] (bottomleft) rectangle (topright);
-    \draw[draw=none, line width=0pt, bottom color=titlebgcolor, top
-     color=framecolor] (bottomleft) rectangle ($(bottomleft)+(\textwidth,3)$);
+\definebackgroundstyle{HWBackgroundStyle}{
+    \draw[line width=0pt, bottom color=backgroundBG, top color=backgroundBG] (bottomleft) rectangle (topright);
+    \draw[draw=none, line width=0pt, bottom color=colorFour, top
+     color=colorThree] (bottomleft) rectangle ($(bottomleft)+(\textwidth,60pt)$);
+}
+
+%% block
+\defineblockstyle{HWBlockStyle}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
+    titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
+    bodyverticalshift=40pt, roundedcorners=0, linewidth=20pt,
+    titleinnersep=17pt, bodyinnersep=30pt
+}{
+    % \draw[color=framecolor, fill=blockbodybgcolor, line width=0pt,
+    % rounded corners=\blockroundedcorners] (blockbody.south west)
+    % rectangle (blockbody.north east);
+    \ifBlockHasTitle
+    \draw[color=framecolor, fill=blocktitlebgcolor,
+    rounded corners=\blockroundedcorners] (blocktitle.south west)
+    rectangle (blocktitle.north east);
+    \fi
+}
+
+%% innerblock
+\defineinnerblockstyle{HWInnerBlockStyle}{
+    titlewidthscale=1, bodywidthscale=1, titlecenter,
+    titleoffsetx=0pt, titleoffsety=0pt, bodyoffsetx=0mm, bodyoffsety=15mm,
+    bodyverticalshift=35pt, roundedcorners=0, linewidth=2pt,
+    titleinnersep=6mm, bodyinnersep=30pt
+}{
+    \ifInnerblockHasTitle
+    \draw[color=innerblocktitlebgcolor,round cap-round cap]
+        ($(innerblockbody.south east)!0.5!(innerblockbody.south)$)--($(innerblockbody.south west)!0.5!(innerblockbody.south)$);
+    \draw[color=innerblocktitlebgcolor,round cap-round cap, line width=2pt]
+        (innerblocktitle.south east)--(innerblocktitle.south west);
+    \fi
 }
 
 
-% \usebackgroundstyle{mystyle}
-\usecolorstyle[colorPalette=HWPalette]{sampleColorStyle}
-\usetitlestyle{HWTitleStyle}
+%% define theme and use it
+\definelayouttheme{HWLayoutTheme}{
+    \usecolorstyle[colorPalette=HWPalette]{HWColorStyle}
+    \usebackgroundstyle{HWBackgroundStyle}
+    \usetitlestyle{HWTitleStyle}
+    \useblockstyle{HWBlockStyle}
+    \useinnerblockstyle{HWInnerBlockStyle}
+}
 
+\usetheme{HWLayoutTheme}
 
 %% layout
 %% title
